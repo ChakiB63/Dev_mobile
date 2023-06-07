@@ -50,7 +50,6 @@ const App = () => {
               } else if (route.name === 'Dashboard') {
                 iconName = focused ? 'grid' : 'grid-outline';
               } 
-              
 
               return <Ionicons name={iconName} size={size} color={color} />;
             },

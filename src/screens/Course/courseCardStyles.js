@@ -17,41 +17,33 @@ const courseCardStyles = StyleSheet.create({
     },
     elevation: 2,
   },
-  image: {
+  imageURL: {
     width: 80,
-    height: 45,
-    resizeMode: 'cover',
-    borderRadius: 10,
+    height: 50,
     marginRight: 17,
   },
   details: {
     flex: 1,
   },
-  title: {
+  titre: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 8,
-   
+    marginBottom: 4,
+
   },
-  instructor: {
+ professeur: {
     color: '#999999',
     marginBottom: 9,
   },
  
-  rating: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  ratingText: {
-    marginLeft: 8,
-  },
-  duration: {
+ 
+  duree: {
     color: '#999999',
-    marginTop: 8,
+    marginTop: 5,
   },
   prix:{
     color: '#999999',
-    marginTop: 8,
+    marginTop: 5,
 
   },
   description: {

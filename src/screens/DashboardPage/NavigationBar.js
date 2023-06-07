@@ -1,19 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../../Constants';
 
-const NavigationBar = () => {
+const NavigationBar = ({ onSearch }) => {
+  const [searchText, setSearchText] = useState('');
+
+
+
   return (
     <View style={styles.container}>
-      <Ionicons name="menu-outline" size={28} color={colors.primary} />
-      <Text style={styles.logo}>ESI-Learning</Text>
-      <TextInput
-        placeholder="Search courses"
-        style={styles.searchBar}
-        placeholderTextColor={colors.grey}
-      />
-    
+      <Text style={styles.text}>ESI-Learning</Text>
+      
     </View>
   );
 };
@@ -21,26 +19,21 @@ const NavigationBar = () => {
 const styles = {
   container: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: colors.white,
+    alignItems: 'center',
+    backgroundColor: colors.lightblue,
     padding: 16,
     borderBottomColor: colors.lightGrey,
-    borderBottomWidth: 1,
+    borderBottomWidth: 5,
   },
-  logo: {
+  text: {
     fontWeight: 'bold',
     fontSize: 20,
-    color: colors.primary,
-  },
-  searchBar: {
-    flex: 1,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.lightGrey,
-    paddingHorizontal: 16,
-    marginHorizontal: 'auto',
+    color: colors.white,
+    textAlign: 'center',
+    flex: 1, 
   },
 };
+
 
 export default NavigationBar;

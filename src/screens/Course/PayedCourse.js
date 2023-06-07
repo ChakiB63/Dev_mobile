@@ -4,6 +4,7 @@ import { IconButton } from 'react-native-paper';
 import { Video } from 'expo-av';
 import { useFonts } from 'expo-font';
 import { firebase, storage } from '../../firebase/config';
+import { db } from '../../firebase/config';
 
 
 const PayedCourse = () => {
@@ -12,21 +13,46 @@ const PayedCourse = () => {
   const [fontsLoaded] = useFonts({
     'Material Design Icons': require('@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf'),
   });
+  const [courseData, setCourseData] = useState({
+    courseName: '',
+    instructorName: '',
+    description: '',
+  });
 
- 
+  useEffect(() => {
     const fetchVideoUrl = async () => {
       try {
-        const storageRef = firebase.storage().ref(); 
-        const videoRef = storageRef.child('DevOps In 5 Minutes _ What Is DevOps__ DevOps Explained _ DevOps Tutorial For Beginners _Simplilearn.mp4'); // Remplacez par le chemin vers votre fichier vidéo dans Firebase Cloud Storage
+        const storageRef = firebase.storage().ref();
+        const videoRef = storageRef.child('DevOps In 5 Minutes _ What Is DevOps__ DevOps Explained _ DevOps Tutorial For Beginners _Simplilearn.mp4');
         const url = await videoRef.getDownloadURL();
         setVideoUrl(url);
       } catch (error) {
         console.log('Erreur lors de la récupération de l\'URL de téléchargement de la vidéo:', error);
       }
     };
-    
-    // Appelez fetchVideoUrl() pour récupérer l'URL de téléchargement de votre vidéo
+
+    // Fetch course data from Firestore and update state
+    const fetchCourseData = async () => {
+      try {
+        const courseDoc = await db.collection('courses').doc('2').get(); // Replace 'your_course_id' with the actual ID of the course document in Firestore
+        if (courseDoc.exists) {
+          const { title, instructor, description } = courseDoc.data();
+          setCourseData({
+          title,
+            instructor,
+            description,
+          });
+        } else {
+          console.log('No course document found');
+        }
+      } catch (error) {
+        console.log('Error fetching course data:', error);
+      }
+    };
+
     fetchVideoUrl();
+    fetchCourseData();
+  }, []);
 
   const handlePlayVideo = () => {
     setIsPlaying(true);
@@ -58,14 +84,15 @@ const PayedCourse = () => {
         )}
       </View>
 
-    
-      <View style={styles.chapterContainer}>
-        <Text style={styles.chapterTitle}>Chapters:</Text>
-      { /* <Text style={styles.chapter}>Chapter 1</Text>
-        <Text style={styles.chapter}>Chapter 2</Text>
-        <Text style={styles.chapter}>Chapter 3</Text>*/}
-        {/* Add more chapters as needed */}
+      {/* Course information */}
+      <View style={styles.infoContainer}>
+        <Text style={styles.title}>{courseData.title}</Text>
+        <Text style={styles.instructor}>{courseData.instructor}</Text>
+        <Text style={styles.description}>{courseData.description}</Text>
       </View>
+
+    
+      
     </View>
   );
 };
@@ -86,23 +113,34 @@ const styles = StyleSheet.create({
     height: 300, // Adjust the height as needed
     width: '100%', // Adjust the width as needed
   },
-  
   playButton: {
     position: 'absolute',
   },
-  chapterContainer: {
-    flex: 1,
-    padding: 20,
+  infoContainer: {
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
-  chapterTitle: {
+  title: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: 'blue', 
+    textDecorationLine: 'underline', 
+
   },
-  chapter: {
+  instructor: {
     fontSize: 16,
-    marginBottom: 5,
+    marginBottom: 10,
+    fontWeight: 'bold',
+
   },
+  description: {
+    fontSize: 14,
+    marginBottom: 20,
+    color: 'gray',
+  },
+  
+  
 });
 
 export default PayedCourse;

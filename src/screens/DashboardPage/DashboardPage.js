@@ -1,35 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, TouchableOpacity , StyleSheet,Image} from 'react-native';
 import NavigationBar from '../DashboardPage/NavigationBar';
 import CourseCard from '../Course/CourseCard';
-import FollowedCourses from '../Course/FollowedCourses';
 import OtherCourses from '../Course/OtherCourses';
 import { useNavigation } from '@react-navigation/native';
-import { db } from '../../firebase/config';
+import { db ,firebase} from '../../firebase/config';
+import courseCardStyles from '../Course/courseCardStyles';
 import 'firebase/firestore';
 import TextButton from '../../components/TextButton';
+import CourseDetails from '../Course/CourseDetails';
 
 const DashboardPage = ({ onPress }) => {
   const navigation = useNavigation();
-  const [courses, setCourses] = useState([]);
+  const [formation, setCourse] = useState(null);
 
+  
   useEffect(() => {
-    const fetchCourses = async () => {
+    const fetchCourse = async () => {
       try {
-        const coursesSnapshot = await db.collection('courses').get();
-        const courseData = coursesSnapshot.docs.map((doc) => doc.data());
-        setCourses(courseData);
+        const courseSnapshot = await firebase.database().ref('formation/-NWY_1QJTbQMObmVv8Lo').once('value');
+        const courseData = courseSnapshot.val();
+        if (courseData) {
+          setCourse(courseData);
+        }
       } catch (error) {
-        console.error('Error fetching courses: ', error);
+        console.error('Error fetching course: ', error);
       }
     };
 
-    fetchCourses();
+    fetchCourse();
   }, []);
-
-  const handleCoursePress = (course) => {
+  const handleCoursePress = (formation) => {
     // Navigate to the course details screen
-    navigation.navigate('CourseDetails', { course: course });
+    navigation.navigate('CourseDetails', { formation: formation });
   };
 
   return (
@@ -37,26 +40,40 @@ const DashboardPage = ({ onPress }) => {
       <NavigationBar />
 
       <ScrollView style={{ paddingHorizontal: 16 }}>
-        <Text>Mes Formations:</Text>
+        <Text style={styles.Text}>Mes Formations:</Text>
 
-        {courses.map((course) => (
-          <TouchableOpacity key={course.id} onPress={() => handleCoursePress(course)}>
-            <CourseCard course={course} />
+        {formation && (
+          <TouchableOpacity
+            style={courseCardStyles.container}
+            key={formation.id}
+            onPress={() => handleCoursePress(formation)}
+          >
+            <Image source={{ uri: formation.imageURL }} style={courseCardStyles.imageURL} />
+            <View style={courseCardStyles.description}>
+              <Text style={courseCardStyles.titre}>{formation.titre}</Text>
+              <Text style={courseCardStyles.professeur}>{formation.professeur}</Text>
+              <Text style={courseCardStyles.duree}>{formation.duree}</Text>
+            </View>
           </TouchableOpacity>
-        ))}
+        )}
+        
 
-        <TouchableOpacity>
-          <TextButton label="Voir plus" onPress={onPress} />
-        </TouchableOpacity>
-
-        <Text>D'autres Formation: </Text>
-        <OtherCourses />
-        <TouchableOpacity>
-          <TextButton label="Voir plus" onPress={onPress} />
-        </TouchableOpacity>
+        <Text style={styles.Text}>D'autres Formations:</Text>
+        <OtherCourses/>
+        
       </ScrollView>
     </View>
   );
+
 };
+const styles = StyleSheet.create({
+Text: {
+    fontSize: 17, // Adjust the font size as needed
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textDecorationLine: 'underline', 
+
+  },
+});
 
 export default DashboardPage;
