@@ -36,9 +36,9 @@ Suivez les étapes ci-dessous pour installer et exécuter ce projet localement.
    git clone [URL_DU_DÉPÔT_GIT]
  `cd [NOM_DU_RÉPERTOIRE]`
  (pour acceder au répertoire du projet)
-npm install (Installez les dépendances du projet)
-npm install -g react-native expo
-expo start (Démarrez l'application avec Expo )
+`npm install` (Installez les dépendances du projet)
+`npm install -g react-native expo`
+`expo start` (Démarrez l'application avec Expo )
 +(Utilisez l'application Expo Go sur votre appareil mobile ou un émulateur pour scanner le code QR et lancer l'application.)
 ## Utilisation
 
