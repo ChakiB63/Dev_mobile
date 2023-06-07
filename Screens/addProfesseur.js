@@ -1,5 +1,4 @@
-import { View , Text , TouchableOpacity, TextInput,StyleSheet, Image, KeyboardAvoidingView, Alert} from "react-native";
-import {useNavigation } from '@react-navigation/native'
+import { View , Text , TouchableOpacity, TextInput,StyleSheet, Alert} from "react-native";
 import { addProfesseur } from "../config";
 import React, {useState} from 'react';
 

@@ -1,8 +1,6 @@
 
-import { StyleSheet, View, ScrollView, FlatList, Text } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import CardTableau from '../Components/CardTableau.js';
-import tableaudebord from '../Arrays/tableaudebord.js';
-import { Ionicons } from '@expo/vector-icons';
 
 import { getFormationTotal, getTransactionTotal, getEtudiantTotal, getProfesseurTotal } from "../config.jsx";
 import { useState } from 'react';

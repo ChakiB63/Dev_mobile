@@ -1,5 +1,5 @@
 
-import { StyleSheet, View, ScrollView, FlatList, Button,  } from 'react-native';
+import { StyleSheet, View, FlatList  } from 'react-native';
 import React, { useState } from 'react';
 import CourseCard from '../Components/CourseCard.js';
 
