@@ -1,4 +1,14 @@
 {
-  "name": "Authentificattion",
-  "displayName": "Authentificattion"
+  "name": "Authentication",
+  "expo": {
+    "ios": {
+      "infoPlist": {
+        "NSCameraUsageDescription": "Allow access to the camera",
+        "NSPhotoLibraryUsageDescription": "Allow access to the photo library",
+        "NSPhotoLibraryAddUsageDescription": "Allow saving photos to the photo library",
+        "NSNetworkAccessAllowed": true
+      }
+      
+    }
+  }
 }

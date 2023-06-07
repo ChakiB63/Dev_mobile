@@ -1,3 +1,3 @@
 
 
-export{ default} from ".../components/DashboardPage";
+export{ default} from "../DashboardPage/DashboardPage";

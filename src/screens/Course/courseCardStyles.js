@@ -7,9 +7,9 @@ const courseCardStyles = StyleSheet.create({
     padding: 16,
     marginBottom: 16,
     backgroundColor: '#FFFFFF',
-    borderRadius: 8,
+    borderRadius: 20,
     shadowColor: '#000000',
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.2,
     shadowRadius: 2,
     shadowOffset: {
       width: 0,
@@ -28,14 +28,14 @@ const courseCardStyles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 8,
    
   },
   instructor: {
     color: '#999999',
-    marginBottom: 8,
+    marginBottom: 9,
   },
  
   rating: {
@@ -49,9 +49,18 @@ const courseCardStyles = StyleSheet.create({
     color: '#999999',
     marginTop: 8,
   },
+  prix:{
+    color: '#999999',
+    marginTop: 8,
+
+  },
   description: {
     color: '#999999',
+    marginBottom: 9,
+
+
   },
+ 
 });
 
 export default courseCardStyles;

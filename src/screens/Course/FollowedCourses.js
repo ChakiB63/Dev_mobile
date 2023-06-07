@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, ScrollView, Text } from 'react-native';
-import CourseCard from '../screens/DashboardPage/CourseCard';
+import CourseCard from './CourseCard';
 
 
 const FollowedCourses = () => {
   const followedCourses = [
-    { id: 1, title: 'Introduction to Devops', instructor: 'Hnida Meriem',image: 'https://www.adimeo.com/hubfs/schema-devops.png',rating: 4.8,description:'Il vous reste que quelques cours pour finaliser cette formation. "43/46 Leçons"' },
+    { id: 1, title: 'Data Visualisation', instructor: 'Najima Daoudi',image: 'https://static.thenounproject.com/png/3728132-200.png',rating: 4.8,description:'Il vous reste que quelques cours pour finaliser cette formation. "43/46 Leçons"' },
   ];
 
   return (

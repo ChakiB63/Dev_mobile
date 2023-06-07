@@ -1,21 +1,19 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '../Constants';
+import { colors } from '../../Constants';
 
 const NavigationBar = () => {
   return (
     <View style={styles.container}>
       <Ionicons name="menu-outline" size={28} color={colors.primary} />
-      <Text style={styles.logo}>ESi-Learning</Text>
+      <Text style={styles.logo}>ESI-Learning</Text>
       <TextInput
         placeholder="Search courses"
         style={styles.searchBar}
         placeholderTextColor={colors.grey}
       />
-      <TouchableOpacity>
-        <Ionicons name="person-outline" size={28} color={colors.primary} />
-      </TouchableOpacity>
+    
     </View>
   );
 };

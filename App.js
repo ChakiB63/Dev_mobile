@@ -1,93 +1,80 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
-import course from './src/screens/DashboardPage/course';
-import CourseCard from './src/screens/DashboardPage/CourseCard'
-import NavigationBar from './src/screens/DashboardPage/NavigationBar';
-import Notification from './src/screens/not/Notification';
-import profile from './src/screens/Profile/profile';
-import SettingsPAge from './src/screens/settingsPage/SettingsPAge';
-import DashboardPage from './src/components/DashboardPage';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons';
+import DashboardPage from './src/screens/DashboardPage';
+import MyCourses from './src/screens/Course/MyCourses/MyCourses';
+import Notification from './src/screens/not/Notification';
+import Profile from './src/screens/Profile/Profile';
+import CourseDetails from './src/screens/Course/CourseDetails';
+import PaymentPage from './src/screens/Payement/PaymentPage';
+import PayedCourse from './src/screens/Course/PayedCourse';
 
-
-
+const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const DashboardStack = () => (
+  <Stack.Navigator
+    screenOptions={{
+      headerShown: false,
+      gestureEnabled: false,
+      cardStyleInterpolator: ({ current: { progress } }) => ({
+        cardStyle: {
+          opacity: progress,
+        },
+      }),
+    }}
+  >
+    <Stack.Screen name="Main" component={DashboardPage} />
+    <Stack.Screen name="CourseDetails" component={CourseDetails} />
+    <Stack.Screen name="PaymentPage" component={PaymentPage} />
+    <Stack.Screen name="PayedCourse" component={PayedCourse} />
+  </Stack.Navigator>
+);
 
-const App =()=> {
+const App = () => {
   return (
-   
-    
-      <SafeAreaView style={styles.container}>
-        <NavigationContainer>
-        <Tab.Navigator screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
+    <SafeAreaView style={styles.container}>
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
 
-            if (route.name === 'Home') {
-              iconName = focused
-                ? 'home'
-                : 'home-outline';
-            } else if (route.name === 'Notifications') {
-              iconName = focused ? 'notifications' : 'notifications-outline';
-            } else if (route.name === 'Profile') {
-              iconName = focused ? 'person' : 'person-outline';
-            } else if (route.name === 'Settings') {
-              iconName = focused ? 'settings' : 'settings-outline';
-            }
-
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor:"blue",
-          inactiveTintColor: 'gray',
-        }}
-      > 
-          <Tab.Screen name="Home" component={DashboardPage} />
-          <Tab.Screen name="Notifications" component={Notification} />
-          <Tab.Screen name="Profile" component={profile} />
-          <Tab.Screen name="Settings" component={SettingsPAge} />
-        </Tab.Navigator>
-        </NavigationContainer>
-      
-    
+              if (route.name === 'Profile') {
+                iconName = focused ? 'person' : 'person-outline';
+              } else if (route.name === 'My Courses') {
+                iconName = focused ? 'book' : 'book-outline';
+              } else if (route.name === 'Dashboard') {
+                iconName = focused ? 'grid' : 'grid-outline';
+              } 
               
-        
-      </SafeAreaView>
-      
-    
-            
-          
-    
-      
-    
+
+              return <Ionicons name={iconName} size={size} color={color} />;
+            },
+          })}
+          tabBarOptions={{
+            activeTintColor: 'blue',
+            inactiveTintColor: 'gray',
+            useNativeDriver: true,
+          }}
+          detachInactiveScreens={false}
+        >
+          <Tab.Screen name="Dashboard" component={DashboardStack} />
+          <Tab.Screen name="My Courses" component={MyCourses} />
+          <Tab.Screen name="Profile" component={Profile} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    
-  },
-  scrollContainer: {
-    flex: 1,
-    width: '100%',
-    paddingVertical: 20,
-    paddingHorizontal: 10,
   },
 });
 

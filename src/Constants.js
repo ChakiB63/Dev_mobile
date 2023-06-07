@@ -4,7 +4,10 @@ export const colors = {
     black: '#000000',
     grey: '#7C7C7C',
     lightGrey: '#F5F5F5',
+    yellow:'#e9fc0d',
+    lightblue:'#286aed',
   };
+  
   
   export const fontSizes = {
     small: 14,
