@@ -47,7 +47,7 @@ Suivez les étapes ci-dessous pour installer et exécuter ce projet localement.
 
 
 <iframe width="560" height="315" src="https://esiac-my.sharepoint.com/:l:/g/personal/el-mehdi_arejdal_esi_ac_ma/FBWStC_JhIZOpp8oG3aExBYBXTJGaHwdVE5VjuThLX22nQ?e=dGBMcD" frameborder="0" allowfullscreen></iframe>
-![Student Interface](https://esiac-my.sharepoint.com/:l:/g/personal/el-mehdi_arejdal_esi_ac_ma/FBWStC_JhIZOpp8oG3aExBYBXTJGaHwdVE5VjuThLX22nQ?e=dGBMcD)
+
 
 
 
